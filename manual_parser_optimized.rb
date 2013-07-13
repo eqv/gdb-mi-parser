@@ -24,6 +24,9 @@ class ManualParser
   end
 
   def parse(line)
+    line = line.strip.chomp('\n') 
+    #THIS chomp('\n') is not a bug, gdb sometimes appends a literal '\n' this is a confirmed
+    #gdb bug. This workaround should become obsolete sometime in the future
     return Msg.new(nil, 'gdb', 'done') if line == "(gdb)"
     state = mk_state(line)
     parse_msg(state)

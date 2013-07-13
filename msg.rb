@@ -2,23 +2,10 @@
 
 # This class represents a message send by gdb
 class Msg
-  attr_accessor :msg_type # mi, record, async, stream, 
+  attr_accessor :msg_type # mi, record, async, stream,
   attr_reader :content_type # exec, status, notify, consol, log, target
   attr_accessor :token # numeric
-  attr_accessor :value # value may be any json compilant structure such as hash/array fixnum etc
-
-  # @return [Array] A structur [token, msg_type, content_type, value] that can be converted into a json string
-  def to_json_struct
-    [@token, @msg_type, @content_type, @value]
-  end
-
-# creates a new Msg from the json struct.
-# @param [Array] json_struct the json struct as returned by to_json_struct
-# @return [Msg] the Message constructed from the json_struct
-  def self.from_json_struct(json_struct)
-    token, msg_type, content_type, value = json_struct
-    self.new(msg_type, content_type, value, token)
-  end
+  attr_accessor :value # value may be any json compilant structure such as hash/array fixnum etc. HOWEVER it may also be a ResultList due to stupid design decisions in gdb-mi 2
 
   def content_type=(ct)
     @content_type = case ct

@@ -1,4 +1,4 @@
 gdb-mi-parser
 =============
 
-A fast recursive decent parser (no backtracking) for gdb MI messages, written in ruby. 
+A faster recursive decent parser (no backtracking) for gdb MI 2.0 messages, written in ruby. 
